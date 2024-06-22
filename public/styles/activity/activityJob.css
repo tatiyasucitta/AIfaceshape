@@ -1,0 +1,373 @@
+body {
+    background-color: #ebebeb;
+    margin: 0;
+    padding: 0;
+    /* overflow-y: scroll; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center */
+}
+
+.navbar {
+    display: flex;
+    background-color: #466aa2;
+    width: -webkit-fill-available;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px 20px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.306);
+    position: fixed;
+    top:0;
+    /* left:0; */
+    z-index: 100;
+}
+    
+.contLogo {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    color: bisque;
+    align-items: center;
+}
+
+.contNavbarComponent {
+    display: flex;
+    width:fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navbarButtonPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userProfileImage{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.userProfileImage img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.buttonIconPage img {
+    max-width: 35px;
+    max-height: 35px;
+    cursor: pointer;
+}
+
+.buttonTextPage {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    color: white;
+}
+
+.searchBar {
+    --padding: 1.5%;
+
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    background-color: white;
+    border-radius: 5px;
+}
+
+.searchInput {
+    color: #4c4949;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 100%;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 160px;
+    right:0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+  
+.dropdown-content .option {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.activityContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6vw;
+}
+
+.leftSideContent {
+    width: 35%;
+    margin-right: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rightSideContent {
+    width: 35%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.saved {
+    background-color: #add8e6;
+    border-radius: 20px;
+    font-size: 120%;
+    font-weight: 600;
+    width: 22%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.applied {
+    background-color: #add8e6;
+    border-radius: 20px;
+    font-size: 120%;
+    font-weight: 600;
+    width: 25%;
+    height: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.optionPostJobContainer {
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: start;
+    width:50%;
+    /* flex-direction: column; */
+}
+
+.postOption {
+    font-size: 150%;
+    font-weight: 600;
+    margin-right: 8%;
+    color: rgba(0, 0, 0, 0.548);
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jobOption {
+    font-size: 150%;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    /* gap:20px; */
+    width:45%;
+}
+    
+.postCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.306);
+    border-radius: 10px;
+    width:fit-content;
+    height: fit-content;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.postContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;   
+    width:45vw;
+}
+
+.topPostContainer{
+    display: flex;
+    flex-direction: column;
+    gap:20px;  
+    width:45vw;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.feedPost{
+    width: 45vw;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+}
+
+.profileContainer img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profileName {
+    font-weight: 600;
+    font-size: 115%;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.followButton {
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.bottomPostContainer{
+    width:45vw;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.postDescription {
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 90%;
+    width:fit-content
+}
+
+.postContainer img{
+    height: 80px;
+    width: 80px;
+}
+
+.postShareIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.lineContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.lineObject {
+    height: 1.7px;
+    width:100%;
+    background-color: #868686;
+    /* margin: 10px; */
+}
+
+.jobPosts {
+    background-color: white;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.306);
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    padding:20px 0px;
+    align-items: center;
+}
+
+.companyLogoContainer img {
+    margin-left: 4%;
+}
+
+.jobComponentContainer {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin:10px;
+}
+
+.jobTitle {
+    font-size: 180%;
+    font-weight: 500;
+}
+
+.jobInfo {
+    margin-top: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+    margin-bottom: 2%;
+}
+
+.jobLocation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+}
+
+.saveButton {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.moreInfoButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+

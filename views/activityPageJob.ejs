@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity</title>
+
+    <!-- <link rel="stylesheet" href="{{asset('css/activity.css')}}"> -->
+    <link rel="stylesheet" href="styles/activity/activityJob.css" />
+    <link rel="stylesheet" href="styles/pop-up/post.css" />
+    <link rel="stylesheet" href="styles/pop-up/jobDetail.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
+        <div class="contLogo">TALENTSEEKR</div>
+        <div class="contNavbarComponent">
+           
+            <a href="/activity"> 
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/save.png">
+                </div>
+                <span class="buttonTextPage"> Saved </span>
+                </div>
+            </a>
+
+            
+            <a href="/">
+                <div class="navbarButtonPage">
+                     <div class="buttonIconPage">
+                        <img src="images/nav-icon/Home.png" />
+                    </div>
+                    <span class="buttonTextPage"> Home</span>
+                </div>
+            </a>
+
+            
+            <a href="/explore">
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/explore.png" />
+                </div>
+                <span class="buttonTextPage" > Explore</span>
+                </div>
+            </a>
+
+            <div class="searchBar">
+            <img src="images/nav-icon/Map.png" />
+            <form>
+                <input class="searchInput" type="search" placeholder="Indonesia" />
+            </form>
+            </div>
+            <div class="navbarButtonPage">
+                <div class="buttonIconPage dropdown">
+                    <img src="images/nav-icon/hamburger.jpg" alt="">
+                    <div class="dropdown-content">
+                        <a href="/profile-page"> <div class="option">
+                            <div class="userProfileImage">
+                                <img src="images/dashboard/profile.png" />
+                            </div>
+                            <p>Profile</p>
+                        </div>
+                    </a>
+                        <div class="option" id="openPopupPostBtn" href="">Post</div>
+                        
+                        <a href="/post-job"><div class="option" >Post a Job</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="activityContent">
+        <div class="saved">Saved Post</div>
+
+        <div class="optionPostJobContainer">
+            <h1 class="postOption"><a href="/activity">Post</a> </h1>
+            <h1 class="jobOption"><a href="/activity-job">Job</a></h1>
+        </div>
+        <div class="posts">
+            <% if(Array.isArray(data) && data.length > 0) { %> <% for(let i = 0 ; i < data.length ; i++){ %>
+                <div class="jobPosts">
+                  <div class="companyLogoContainer">
+                    <img  class="company-profile" alt="logo" src=<%=data[i].companyProfile %>  />
+                  </div>
+                  <div class="jobComponentContainer">
+                    <div>
+                      <span class="jobTitle"><%= data[i].title %></span>
+                      <div class="jobInfo">
+                        <span> <%=data[i].company %> <br /></span>
+                        <span><b>7d ago</b></span>
+                      </div>
+                      <span class="jobLocation"> <%= data[i].jobLocation %> </span>
+                    </div>
+                    <div class="saveButton">
+                      <!-- <img src="./../image/activity/moreInfo.png" /> -->
+                    </div>
+                    <button id="openPopupJobBtn" class="moreInfoButton" onclick=changeJobDetail(this) value=<%=data[i].jobId %> >more info</button>
+                  </div>
+                </div>
+        
+                <% } %> <% } else { %>
+                <h1>No data available</h1>
+                <% } %>
+           
+           
+        </div>
+    </div>
+    <form id="popupPost" class="popupPost" method="POST" action="/upload-post" enctype="multipart/form-data">
+        <div class="popupPost-content">
+            <span id="closePopupPostBtn" class="closePost">&times;</span>
+            <div class="user-infoPost">
+                <% if(locals.data){ %>
+                    <img src=<%=data.profile %> alt="User Image" class="user-imgPost">
+                    <div>
+                        <p class="user-namePost"> <%=data.UserName %></p>
+                        <p class="post-visibilityPost">Post to Anyone</p>
+                    </div>
+                    <% } %>
+            </div>
+            <div class="post-desc">
+                <textarea name="content" placeholder="What do you want to talk about?"></textarea >
+            </div>
+            <div class="post-options">
+                <label for="post-img-input" class="icon">&#128247;</label>
+                <input type="file" id="post-img-input" accept="image/*"  name="image" >
+            </div>
+            <div class="post-actions">
+                <button class="post-btn">Post</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- pop up job detail -->
+    <div id="popupJob" class="popupJob">
+        <div class="popupJob-content">
+            <span id="closePopupJobBtn" class="closeJob">&times;</span>
+            <div class="popupJob-header">
+                <img src="images/activity/companyLogo.png" id="company-logo-id" alt="Company Logo" class="logoJob">
+                <div class="job-title">
+                    <h2 id="job-title">Fashion Show Model</h2>
+                    <p id="job-company">D&A Model Management</p>
+                    <p id="">7d ago</p>
+                </div> 
+            </div>
+            <div class="job-info">
+                <p id="job-location"><i class="fa fa-map-marker"></i> </p>
+                <p id="job-fee">Fee: Rp.1.500.000</p>
+                <p id="job-amount"><i class="fa fa-clock-o"></i> </p>
+            </div>
+            <div class="job-description" >
+                <h3>Job Description :</h3>
+                <p id="job-desc"></p>
+            </div>
+            <div class="job-requirements">
+                <h3>Job Requirements :</h3>
+                <ol id="job-req">
+                    
+                </ol>
+            </div>
+            <div class="popup-actions">
+                <button id="unsave-button" class="save-btn"onclick="unsaveJob(this)"  value="" >unsave</button>
+                <button class="apply-btn">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const dropdownBtn = document.querySelector(".dropdown");
+        const dropdownContent = dropdownBtn.querySelector(".dropdown-content");
+
+        dropdownBtn.addEventListener("click", function () {
+            dropdownContent.classList.toggle("show");
+        });
+
+        // post
+        document.getElementById('openPopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'flex';
+        });
+        
+        document.getElementById('closePopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'none';
+        });
+
+
+        document.getElementById('post-img-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('File selected:', file);
+            }
+        });
+        openPopUp = document.querySelectorAll('.moreInfoButton')
+        closePopUp = document.querySelectorAll('.closeJob')
+        openPopUp.forEach(popUp => {
+            popUp.addEventListener('click', function() {
+            document.getElementById('popupJob').style.display = 'flex';
+        });
+        });
+        closePopUp.forEach(close => {
+            close.addEventListener('click', function() {
+            document.getElementById('popupJob').style.display = 'none';
+        });
+        });
+        
+       
+       
+        async function  changeJobDetail(button ){
+            let result ;
+            await axios.get(`http://localhost:3000/activity-job/${button.value}`).then(response => 
+            {
+                
+                console.log(response.data)
+                document.getElementById("job-company").innerHTML = response.data.company
+                document.getElementById("job-title").innerHTML = response.data.title
+                document.getElementById("job-location").innerHTML =  '<i class="fa fa-map-marker"></i>' + response.data.location
+                document.getElementById("job-fee").innerHTML = 'Fee : Rp '+response.data.fee + '.00 '
+                document.getElementById("job-amount").innerHTML = response.data.durationAmount+' ' + response.data.durationUnit
+                document.getElementById("job-desc").innerHTML = response.data.jobDescription
+                document.getElementById("job-req").innerHTML = response.data.jobRequirements
+                document.getElementById("unsave-button").value = response.data.jobId
+                document.getElementById("company-logo-id").src = response.data.companyProfile
+                // console.log(response.data.companyProfile)
+                
+            }
+           ).catch(error =>{
+            console.log(error)
+           })
+           
+           
+
+        };
+        async function unsaveJob(button){
+            let result ;
+            console.log(button.value)
+            await axios.patch(`http://localhost:3000/activity-job/${button.value}`).then(response => 
+            {
+                
+               console.log(response.data)
+                
+            }
+           ).catch(error =>{
+            console.log(error)
+           })
+           location.replace("http://localhost:3000/activity-job");
+        }
+    </script>
+  </body>
+</html>

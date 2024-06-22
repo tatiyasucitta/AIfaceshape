@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentSeekr</title>
+    <link rel="stylesheet" href="/styles/explore.css" />
+    <link rel="stylesheet" href="/styles/pop-up/post.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="content">
+      <div class="navbar">
+        <div class="contLogo">TALENTSEEKR</div>
+        <div class="contNavbarComponent">
+           
+            <a href="/activity"> 
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/save.png">
+                </div>
+                <span class="buttonTextPage"> Saved </span>
+                </div>
+            </a>
+
+            
+            <a href="/">
+                <div class="navbarButtonPage">
+                     <div class="buttonIconPage">
+                        <img src="images/nav-icon/Home.png" />
+                    </div>
+                    <span class="buttonTextPage"> Home</span>
+                </div>
+            </a>
+
+            
+            <a href="/explore">
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/explore.png" />
+                </div>
+                <span class="buttonTextPage" > Explore</span>
+                </div>
+            </a>
+
+            <div class="searchBar">
+            <img src="images/nav-icon/Map.png" />
+            <form>
+                <input class="searchInput" type="search" placeholder="Indonesia" />
+            </form>
+            </div>
+            <div class="navbarButtonPage">
+                <div class="buttonIconPage dropdown">
+                    <img src="images/nav-icon/hamburger.jpg" alt="">
+                    <div class="dropdown-content">
+                      <a href="/profile-page"> <div class="option">
+                        <div class="userProfileImage">
+                            <img src="images/dashboard/profile.png" />
+                        </div>
+                        <p>Profile</p>
+                    </div>
+                </a>
+                        <div class="option" id="openPopupPostBtn" href="">Post</div>
+                        
+                        <a href="/post-job"><div class="option" >Post a Job</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="search">
+        <h1 class="title">Find the right model for each of your projects</h1>
+        <div class="search-box">
+          <input class="input-search-box" type="text" placeholder="Search..." />
+          <button type="button">Search</button>
+        </div>
+      </div>
+      <div class="top-models">
+        <h2>Top Model</h2>
+        <div class="model-list">
+          <div class="model">
+            <img src="images/explore/user1.jpeg" alt="nurkie" />
+            <p>nurkie</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user2.jpeg" alt="grace elizabeth" />
+            <p>grace elizabeth</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user3.jpeg" alt="bella hadid" />
+            <p>bella hadid</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user4.jpeg" alt="taylor hill" />
+            <p>taylor hill</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user1.jpeg" alt="nurkie" />
+            <p>nurkie</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user2.jpeg" alt="grace elizabeth" />
+            <p>grace elizabeth</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user3.jpeg" alt="bella hadid" />
+            <p>bella hadid</p>
+          </div>
+          <div class="model">
+            <img src="images/explore/user4.jpeg" alt="taylor hill" />
+            <p>taylor hill</p>
+          </div>
+        </div>
+      </div>
+      <div class="feeds">
+        <div class="feed-img">
+          <img src="images/explore/feed1.png" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed2.png" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed3.jpeg" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed4.png" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed5.jpeg" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed6.jpeg" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed7.png" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed8.png" alt="" />
+        </div>
+        <div class="feed-img">
+          <img src="images/explore/feed9.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <form id="popupPost" class="popupPost" method="POST" action="/upload-post" enctype="multipart/form-data">
+      <div class="popupPost-content">
+          <span id="closePopupPostBtn" class="closePost">&times;</span>
+          <div class="user-infoPost">
+            <% if(locals.data){ %>
+              <img src=<%=data.profile %> alt="User Image" class="user-imgPost">
+              <div>
+                  <p class="user-namePost"> <%=data.UserName %></p>
+                  <p class="post-visibilityPost">Post to Anyone</p>
+              </div>
+              <% } %>
+          </div>
+          <div class="post-desc">
+              <textarea name="content" placeholder="What do you want to talk about?"></textarea >
+          </div>
+          <div class="post-options">
+              <label for="post-img-input" class="icon">&#128247;</label>
+              <input type="file" id="post-img-input" accept="image/*"  name="image" >
+          </div>
+          <div class="post-actions">
+              <button class="post-btn">Post</button>
+          </div>
+      </div>
+  </form>
+    <script>
+      const dropdownBtn = document.querySelector(".dropdown");
+      const dropdownContent = dropdownBtn.querySelector(".dropdown-content");
+
+      dropdownBtn.addEventListener("click", function () {
+        dropdownContent.classList.toggle("show");
+      });
+      // post
+      document.getElementById('openPopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'flex';
+        });
+        
+        document.getElementById('closePopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'none';
+        });
+
+
+        document.getElementById('post-img-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('File selected:', file);
+            }
+        });
+    </script>
+  </body>
+</html>

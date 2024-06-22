@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&family=Poppins:wght@300;600&display=swap');
+
+*{
+    font-family: "Anek Tamil", sans-serif;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    /* background-repeat: no-repeat;
+    background-size:cover; */
+}
+
+.background {
+    background-image: url('../images/login-background.jpg');
+    /* background-image: url('path/to/your/image.png'); */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    opacity: 100%;
+}
+
+.overlay {
+    background: rgba(68, 68, 68, 0.386);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 50%; */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: cen; */
+    background: #a1a1a1da;
+    /* padding: ; */
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: fit-content;
+    /* max-width: 90%; */
+    gap:6px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* position: absolute; */
+}
+
+.logo img{
+    width: 318px;
+    height: 66px;
+    left: 561px;
+    top: 128px;
+    /* background: url(./../asset/logo-color.png); */
+    mix-blend-mode: screen;
+    border-radius: 10px;
+}
+
+.login-form{
+    color:white;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* gap:30px */
+}
+
+.divider {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.divider::before, .divider::after {
+    flex: 1;
+    content: '';
+    padding: 0.5px;
+    background-color: rgb(255, 255, 255);
+    /* margin: 5px; */
+}
+
+.login-container h2 {
+    margin: 10px 0;
+    font-size: 30px;
+    /* color: #666; */
+    font-weight: 300;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-container input {
+    padding: 10px;
+    height:35px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-weight: 300;
+}
+
+.data{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.form-info input{
+    width:100%;
+}
+
+.form-label{
+    width:100%;
+    display: flex;
+    justify-content: start;
+}
+
+.button {
+    padding: 10px;
+    height: 55px;
+    font-size: 20px;
+    background-color: #215BB6;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.login-container p {
+    font-size: 16px;
+    margin:0px 10px; 
+    font-weight: 300;
+    font-style: normal;
+    /* position: absolute; */
+}
+

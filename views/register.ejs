@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentSeekr</title>
+    <link rel="stylesheet" href="/styles/register.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background">
+      <div class="logo">
+        <img src="images/logo-color.png" alt="" />
+      </div>
+      <div class="overlay">
+        <div class="register-container">
+          <div class="register-form">
+            <h2>Discover Brilliance, Connect with Talent</h2>
+            <form class="register-data" method="POST" action="/register">
+              <!-- @csrf -->
+              <div class="form-info">
+                <div class="data">
+                  <label for="" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Full Name"
+                    name="UserName"
+                    required
+                  />
+                </div>
+
+                <div class="data">
+                  <label for="" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Email"
+                    name="UserEmail"
+                    required
+                  />
+                </div>
+
+                <div class="data">
+                  <label for="" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    name="UserPassword"
+                    required
+                  />
+                </div>
+                <div class="data">
+                  <label for="" class="form-label">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    name="conPw"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckIndeterminate"
+                />
+                <label class="form-check-policy" for="flexCheckIndeterminate">
+                  I agree to User Agreement, Privacy Policy, and Cookie Policy.
+                </label>
+              </div>
+              <button>Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

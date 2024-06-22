@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity</title>
+
+    <!-- <link rel="stylesheet" href="{{asset('css/activity.css')}}"> -->
+    <link rel="stylesheet" href="/styles/activity/activityJob.css" />
+    <link rel="stylesheet" href="/styles/pop-up/post.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+        <div class="contLogo">TALENTSEEKR</div>
+        <div class="contNavbarComponent">
+           
+            <a href="/activity"> 
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/save.png">
+                </div>
+                <span class="buttonTextPage"> Saved </span>
+                </div>
+            </a>
+
+            
+            <a href="/">
+                <div class="navbarButtonPage">
+                     <div class="buttonIconPage">
+                        <img src="images/nav-icon/Home.png" />
+                    </div>
+                    <span class="buttonTextPage"> Home</span>
+                </div>
+            </a>
+
+            
+            <a href="/explore">
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/explore.png" />
+                </div>
+                <span class="buttonTextPage" > Explore</span>
+                </div>
+            </a>
+
+            <div class="searchBar">
+            <img src="images/nav-icon/Map.png" />
+            <form>
+                <input class="searchInput" type="search" placeholder="Indonesia" />
+            </form>
+            </div>
+            <div class="navbarButtonPage">
+                <div class="buttonIconPage dropdown">
+                    <img src="images/nav-icon/hamburger.jpg" alt="">
+                    <div class="dropdown-content">
+                        <a href="/profile-page"> <div class="option">
+                            <div class="userProfileImage">
+                                <img src="images/dashboard/profile.png" />
+                            </div>
+                            <p>Profile</p>
+                        </div>
+                    </a>
+                        <div class="option" id="openPopupPostBtn" href="">Post</div>
+                        
+                        <a href="/post-job"><div class="option" >Post a Job</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="activityContent">
+        <div class="saved">Saved Post</div>
+
+        <div class="optionPostJobContainer">
+           
+            <h1 class="postOption"><a href="/activity">Post</a> </h1>
+            <h1 class="jobOption"><a href="/activity-job">Job</a></h1>
+        </div>
+        <div class="posts">
+            <% if(Array.isArray(data) && data.length > 0) { %>
+                <% for(let i = 0 ; i < data.length ; i++){ %>
+                    <div class="postCard">
+                        <div class="postContent">
+                            <div class="topPostContainer">
+                                <div class="header">
+                                    <div class="profileContainer">
+                                        <img src=<%=data[i].profile %>>
+                                        <span class="profileName"><%= data[i].UserName  %></span>
+                                    </div>
+                                    <button class="followButton">+ follow</button>
+                                </div>
+                                <img class="feedPost" src=<%=data[i].Image %> />
+                            </div>
+            
+                            <div class="lineObject"></div>
+            
+                            <div class="bottomPostContainer">
+                                <p class="postDescription">
+                                <%=data[i].Content %>
+                                </p>
+            
+                                <div class="postShareIcon">
+                                    <img src="images/activity/share.png" />
+                                    <img src="images/activity/save.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+              <% } else { %>
+                <h1>No data available</h1>
+              <% } %> 
+            
+           
+        
+            
+        </div>
+    </div>
+    <form id="popupPost" class="popupPost" method="POST" action="/upload-post" enctype="multipart/form-data">
+        <div class="popupPost-content">
+            <span id="closePopupPostBtn" class="closePost">&times;</span>
+            <div class="user-infoPost">
+                <% if(locals.data){ %>
+                    <img src=<%=data.profile %> alt="User Image" class="user-imgPost">
+                    <div>
+                        <p class="user-namePost"> <%=data.UserName %></p>
+                        <p class="post-visibilityPost">Post to Anyone</p>
+                    </div>
+                    <% } %>
+            </div>
+            <div class="post-desc">
+                <textarea name="content" placeholder="What do you want to talk about?"></textarea >
+            </div>
+            <div class="post-options">
+                <label for="post-img-input" class="icon">&#128247;</label>
+                <input type="file" id="post-img-input" accept="image/*"  name="image" >
+            </div>
+            <div class="post-actions">
+                <button class="post-btn">Post</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+      const dropdownBtn = document.querySelector(".dropdown");
+      const dropdownContent = dropdownBtn.querySelector(".dropdown-content");
+
+      dropdownBtn.addEventListener("click", function () {
+        dropdownContent.classList.toggle("show");
+      });
+
+      // post
+      document.getElementById('openPopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'flex';
+        });
+        
+        document.getElementById('closePopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'none';
+        });
+
+
+        document.getElementById('post-img-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('File selected:', file);
+            }
+        });
+    </script>
+  </body>
+</html>

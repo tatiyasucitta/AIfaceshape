@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@100..800&display=swap');
+
+body {
+    font-family: "Anek Tamil", sans-serif;
+    font-optical-sizing: auto;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    display: flex;
+    background-color: #466aa2;
+    width: -webkit-fill-available;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px 20px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.306);
+    position: fixed;
+    top:0;
+    /* left:0; */
+    z-index: 100;
+}
+    
+.contLogo {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    color: bisque;
+    align-items: center;
+}
+
+.contNavbarComponent {
+    display: flex;
+    width:fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navbarButtonPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userProfileImage{
+    /* display: flex; */
+    align-items: center;
+    gap:10px;
+}
+
+.userProfileImage img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.buttonIconPage img {
+    max-width: 35px;
+    max-height: 35px;
+    cursor: pointer;
+}
+
+.buttonTextPage {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    color: white;
+}
+
+.searchBar {
+    --padding: 1.5%;
+
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    background-color: white;
+    border-radius: 5px;
+}
+
+.searchInput {
+    color: #4c4949;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 100%;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 160px;
+    right:0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+  
+.dropdown-content .option {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap:40px;
+    margin-top:70px;
+}
+
+.left-sidebar {
+    width: 20%;
+    height:fit-content;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.right-sidebar{
+    width: 30%;
+    height:fit-content;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        
+}
+
+.main-content {
+    width: 55%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.optionPostJobContainer {
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: start;
+    width:50%;
+    /* flex-direction: column; */
+}
+
+.postOption {
+    font-size: 150%;
+    font-weight: 600;
+    margin-right: 8%;
+    color: rgba(0, 0, 0, 0.548);
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jobOption {
+    font-size: 150%;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-card{
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card img {
+    width:100%;
+    width: 100px;
+    height:100px;
+    object-fit:cover;
+    border-radius: 50%;
+}
+
+.user-info h3 , .user-info p{
+    text-align: center;
+    height: fit-content;
+    margin:4px;
+}
+
+.news h4{
+    margin:0;
+}
+
+.shortcuts ul, .news ul {
+    list-style: none;
+    padding: 0;
+}
+
+.shortcuts ul li, .news ul li {
+    padding: 5px 0;
+}
+
+.post-create input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.left{
+    display: flex;
+}
+
+.profile {
+    width: 50px;
+    height:50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.jobPosts {
+    background-color: white;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.306);
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    padding:20px 0px;
+    align-items: center;
+}
+
+.companyLogoContainer img {
+    margin-left: 4%;
+}
+
+.jobComponentContainer {
+    display: flex;
+    position: relative;
+    width: 68%;
+}
+
+.jobTitle {
+    font-size: 180%;
+    font-weight: 500;
+}
+
+.jobInfo {
+    margin-top: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+    margin-bottom: 2%;
+}
+
+.jobLocation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 85%;
+}
+
+.saveButton {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.moreInfoButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 25%;
+    height: 40px;
+    cursor: pointer;
+} 
+
+.user1{
+    display: flex;
+    align-items: center;
+    gap:5px;
+    justify-content: space-between;
+}
+
+.user1 .user-info h3 , .user1 .user-info p{
+    text-align: start;
+    height: fit-content;
+    margin:4px;
+}
+.user-info p{
+    font-size: 12px;
+}
+
+.followButton {
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 25px;
+    cursor: pointer;
+}

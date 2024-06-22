@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentSeekr</title>
+    <link rel="stylesheet" href="/styles/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background">
+      <div class="overlay">
+        <div class="login-container">
+          <div class="logo">
+            <img src="images/logo-color.png" alt="" />
+          </div>
+
+          <div class="login-form">
+            <h2>Welcome, Fashion People</h2>
+            <form method="POST" action="/login">
+              <div class="data">
+                <label for="" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  name="email"
+                  required
+                />
+              </div>
+
+              <div class="data">
+                <label for="" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  name="password"
+                  required
+                />
+              </div>
+              <button class="button" type="submit">Sign In</button>
+
+              <div class="divider">
+                <p>or</p>
+              </div>
+              <a href="/register">Sign Up</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

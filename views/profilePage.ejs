@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    
+    <link rel="stylesheet" href="/styles/profile/profilePage.css" />
+    <link rel="stylesheet" href="/styles/pop-up/post.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="contLogo">TALENTSEEKR</div>
+        <div class="contNavbarComponent">
+           
+            <a href="/activity"> 
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/save.png">
+                </div>
+                <span class="buttonTextPage"> Saved </span>
+                </div>
+            </a>
+
+            
+            <a href="/">
+                <div class="navbarButtonPage">
+                     <div class="buttonIconPage">
+                        <img src="images/nav-icon/Home.png" />
+                    </div>
+                    <span class="buttonTextPage"> Home</span>
+                </div>
+            </a>
+
+            
+            <a href="/explore">
+                <div class="navbarButtonPage">
+                <div class="buttonIconPage">
+                    <img src="images/nav-icon/explore.png" />
+                </div>
+                <span class="buttonTextPage" > Explore</span>
+                </div>
+            </a>
+
+            <div class="searchBar">
+            <img src="images/nav-icon/Map.png" />
+            <form>
+                <input class="searchInput" type="search" placeholder="Indonesia" />
+            </form>
+            </div>
+            <div class="navbarButtonPage">
+                <div class="buttonIconPage dropdown">
+                    <img src="images/nav-icon/hamburger.jpg" alt="">
+                    <div class="dropdown-content">
+                        <a href="/profile-page"> <div class="option">
+                            <div class="userProfileImage">
+                                <img src="images/dashboard/profile.png" />
+                            </div>
+                            <p>Profile</p>
+                        </div>
+                    </a>
+                        <div class="option" id="openPopupPostBtn" href="">Post</div>
+                        
+                        <a href="/post-job"><div class="option" >Post a Job</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profileContent">
+        <% if(locals.data){ %>
+        <div class="notScroll">
+            <img  class="profile-image" src=<%=data.profile %>>
+            <div class="details-box">
+               
+              
+                 
+                    <h3>Details</h3>
+                    <p>TalentSeeker#: 4715821</p>
+                    <p>FaceShape:  <%=data.face_shape %></p>
+                    <p>Born : <%=data.UserDOB  %></p>
+                    <p>Height : <%= data.UserHeight %></p>
+                    <p>Weight :<%= data.UserWeight %></p>
+                    <hr />
+                    <p>Bust : <%= data.ModelBust %></p>
+                    <p>Waist : <%= data.ModelWaist %></p>
+                    <p>Hip :<%= data.ModelHips%></p>
+                
+                
+                <button class="edit-profile">Edit profile</button>
+                <button class="detect-face-shape">Detect Face Shape</button>
+            </div>
+        </div>
+        <% } else {%>
+            <% } %>
+        <div class="scrollAble">
+            <div class="userfolls">
+                <div class="following">
+                    <% if(locals.following){ %>
+                        <% console.log(following) %>
+                    <p> <%= following.following %> </p>
+                    <% } %>
+                    <h1>Following</h1>
+                </div>
+                <div class="followers">
+                    <%if(locals.follower){ %>
+                       
+                    <p><%=follower.follower %></p>
+                    <% } %>
+                    <h1>Followers</h1>
+
+                </div>
+            </div>
+            <div class="profile-box">
+                <% if(locals.data){ %>
+                    <h3>  <%= data.UserName%> </h3>
+                    <p class="profileDetails1"><%=data.UserGender  %> model | <%=data.UserAddress  %></p>
+                    <p class="profileDetails2"> <%=data.UserEmail %> </p>
+                <% } %>
+            </div>
+
+            <div class="aboutMe-box">
+                <h3>About me</h3>
+                <% if(locals.data) { %>
+                <p class="aboutMeDesc"> <%=data.AboutModel %> </p>
+                <% } %>
+            </div>
+            <div class="optionPostJobContainer">
+                <h1 class="postOption"> <a href="/profile-page">Post</a></h1>
+                <h1 class="jobOption" > <a href="/profile-job-page">Post</a></h1>
+            </div>
+            <div class="image-grid-box">
+                <div class="image-grid">
+                    <div class="image-grid-format">
+                        <% if(Array.isArray(post) && post.length > 0) { %>
+                            <% for(let i = 0 ; i < post.length ; i++){ %>
+                                <img class="post-photo" src=<%=post[i].Image %> alt="">
+                            <% } %>
+                          <% } else { %>
+                            <h1>No data available</h1>
+                          <% } %> 
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="popup" method="POST" , action="/edit-profile" enctype="multipart/form-data">
+        <div class="popup-inner">
+
+            <div class="closePopupBtn" id="closePopupBtn">
+                <button class="saveEditProfileButton">Close</button>
+            </div>
+            <div class="popup-header">
+                <h1>Edit Profile</h1>
+            </div>
+            
+            <% if(locals.data){ %>
+            <div class="popup-body">
+                <div class="upload-circle" id="upload-circle">
+                    <input type="file" id="file-input" accept="image/*"  name="profile">
+                    <div class="plus-sign">+</div>
+                </div>
+                <div class="form-group">
+                    <label for="first-name" >First name</label> 
+                    <input class="inputName" type="text" id="first-name" name="first_name" value=<%= data.UserName %>>
+                    <label for="last-name">Last name</label> 
+                    <input class="inputName" type="text" id="last-name" name="last_name" value="">
+                </div>
+            </div>
+            <div class="popup-body2">
+                <label for="location">Location</label> 
+                <input class="inputProfileInfo" type="text" id="location" name="location" value=<%= data.UserAddress %>>
+                <label for="gender">Gender</label>
+                <input class="inputProfileInfo" type="text" id="gender" name="gender" value=<%=data.UserGender %>>
+                <label for="email">Email</label> 
+                <input class="inputProfileInfo" type="text" id="email" name="email" value= <%=data.UserEmail %>>
+                <label for="bio">Bio</label>
+                <input class="inputProfileInfo2" type="text" id="bio" name="bio" value=<%= data.AboutModel %>>
+            </div>
+            <div class="popup-body3">
+                <div class="popUpFooter">
+                    <label for="age">Age</label> 
+                    <input class="inputProfileInfo3" type="text" id="age" name="age" value= <%=data.UserDOB %>>
+                    <label for="bust">Bust</label>
+                    <input class="inputProfileInfo3" type="text" id="bust" name="bust" value= <%= data.ModelBust %>>
+                </div>
+                <div class="popUpFooter">
+                    <label for="height">Height</label> 
+                    <input class="inputProfileInfo3" type="text" id="height" name="height" value= <%=data.UserHeight %>>
+                    <label for="waist">Waist</label>
+                    <input class="inputProfileInfo3" type="text" id="waist" name="waist" value=<%= data.ModelWaist %>>
+                </div>
+                <div class="popUpFooter">
+                    <label for="weight">Weight</label> 
+                    <input class="inputProfileInfo3" type="text" id="weight" name="weight" value=<%= data.UserWeight %>>
+                    <label for="hips">Hips</label>
+                    <input class="inputProfileInfo3" type="text" id="hips" name="hips" value=<%= data.ModelHips %>>
+                </div>
+            </div>
+            <% } %>
+            <button class="saveEditProfileButton" type="submit">Save</button>
+        </div>
+    </form>
+
+    <div class="popup2">
+        <div class="popup-content">
+            <span class="closePopupBtn2">&times;</span>
+            <h3>upload your image here</h3>
+            <div class="upload-container" id="upload-container">
+                <input type="file" id="file-input2" accept="image/*" style="display: none;">
+                <label for="fileInput" class="upload-label">
+                    <div class="upload-placeholder">
+                        <span>Click here to upload</span> 
+                    </div>
+                </label>
+            </div>
+            <button class="detectFaceShapeButton" onclick="detectFace()">Detect</button>
+        </div>
+    </div>
+
+    <div class="popup3">
+        <div class="popup-content2">
+            <span class="closePopupBtn3">&times;</span>
+            <span>Result</span>
+            <div class="resultFaceShape">
+                <img id="face-shape-result" src="/faceResultsImages/roundFace.svg" alt="Round Face" class="face-image">
+                <h2 id="face-result"></h2>
+            </div>
+            <div class="popup3Footer">
+                <p id="face-shape-data"></p>
+            </div>
+            <div>
+                <button  id="save-button-id" class="save-button" onclick="saveFaceShape(this)" value="">save information</button>
+            </div>
+        </div>
+    </div>
+    
+    <form id="popupPost" class="popupPost" method="POST" action="/upload-post" enctype="multipart/form-data">
+        <div class="popupPost-content">
+            <span id="closePopupPostBtn" class="closePost">&times;</span>
+            <div class="user-infoPost">
+                <% if(locals.data){ %>
+                <img src=<%=data.profile %> alt="User Image" class="user-imgPost">
+                <div>
+                    <p class="user-namePost"> <%=data.UserName %></p>
+                    <p class="post-visibilityPost">Post to Anyone</p>
+                </div>
+                <% } %>
+            </div>
+            <div class="post-desc">
+                <textarea name="content" placeholder="What do you want to talk about?"></textarea >
+            </div>
+            <div class="post-options">
+                <label for="post-img-input" class="icon">&#128247;</label>
+                <input type="file" id="post-img-input" accept="image/*"  name="image" >
+            </div>
+            <div class="post-actions">
+                <button class="post-btn">Post</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        async function saveFaceShape(button){
+            // const formData = new FormData();
+            // // Append the file to the FormData object
+            // formData.append('faceShape', button.value);
+            const requestBody ={
+                'faceShape' : button.value
+            }
+            await axios.post(`http://localhost:3000/save-face-shape` , requestBody).then(response => 
+            {
+                console.log(response)
+                
+            }
+            ).catch(error =>{
+                  console.log(error)
+             })
+             location.replace("http://localhost:3000/profile-page");
+        }
+        async function detectFace(){
+            
+            const fileInput = document.getElementById('file-input2');
+            // Get the selected file
+            const file = fileInput.files[0];
+            if (!file) {
+                console.log("No file selected");
+                return;
+            }
+            let data = new Object()
+            data["Heart"] = "Wajah dengan dahi yang lebar dan dagu yang meruncing. Biasanya terdapat sedikit lengkungan pada garis rambut di dahi. Tampilan: Tulang pipi menonjol dengan dagu yang lebih sempit dan runcing."
+             data["Oval"] = "Wajah dengan panjang lebih besar dari lebarnya, dengan garis rahang yang lebih sempit dari tulang pipi. Dahi sedikit lebih lebar daripada dagu.Tampilan: Proporsi wajah yang seimbang dan bentuk yang lebih lonjong."
+              data["Square"] = "Wajah dengan panjang dan lebar yang hampir sama, namun dengan garis rahang yang lebih tajam dan tegas. Tampilan: Dahi, pipi, dan rahang memiliki lebar yang hampir sama dengan sudut yang tegas."
+               data["Round"] = "Wajah dengan panjang dan lebar yang hampir sama, tanpa garis rahang yang menonjol. Tulang pipi adalah bagian terlebar dari wajah. Tampilan: Kontur wajah yang lembut dan melingkar."
+                data["Rectangle"] = "Wajah dengan panjang lebih besar daripada lebarnya. Dahi, pipi, dan garis rahang biasanya memiliki lebar yang hampir sama. Tampilan: Garis rahang yang kuat dan wajah yang lebih panjang dari biasanya."
+                 data["Heart"] = "Wajah dengan dahi yang lebar dan dagu yang meruncing. Biasanya terdapat sedikit lengkungan pada garis rambut di dahi. Tampilan: Tulang pipi menonjol dengan dagu yang lebih sempit dan runcing."
+
+           
+            const formData = new FormData();
+            // Append the file to the FormData object
+            formData.append('file', file);
+
+             await axios.post(`http://localhost:8000/predict` , formData, {
+                headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+             }).then(response => 
+            {
+                const face_shape = response.data.face_shape
+
+                document.getElementById('face-result').innerHTML = response.data.face_shape
+                document.getElementById('face-shape-result').src = `images/profile/${face_shape}.jpg`
+                document.getElementById('face-shape-data').innerHTML = data[face_shape]
+                document.getElementById('save-button-id').value = face_shape
+                
+            }
+            ).catch(error =>{
+                  console.log(error)
+             })
+
+        }
+        const dropdownBtn = document.querySelector('.dropdown');
+        const dropdownContent = dropdownBtn.querySelector('.dropdown-content');
+      
+        dropdownBtn.addEventListener('click', function() {
+            dropdownContent.classList.toggle('show');
+        });
+
+        // post
+        document.getElementById('openPopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'flex';
+        });
+        
+        document.getElementById('closePopupPostBtn').addEventListener('click', function() {
+            document.getElementById('popupPost').style.display = 'none';
+        });
+
+
+        document.getElementById('post-img-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('File selected:', file);
+            }
+        });
+
+        const editProfileButton = document.querySelector('.edit-profile');
+        const detectFaceButton = document.querySelector('.detect-face-shape');
+        const detectFaceShapeButton = document.querySelector('.detectFaceShapeButton');
+        // const closePopUp = document.querySelector('.closePopupBtn');
+        const closeBtn2 = document.querySelector('.popup-content .closePopupBtn2');
+        const closeBtn3 = document.querySelector('.popup-content2 .closePopupBtn3');
+        const popup = document.querySelector('.popup');
+        const popup2 = document.querySelector('.popup2');
+        const popup3 = document.querySelector('.popup3');
+        const imageUploadInput = document.getElementById('image-upload');
+        const previewImage = document.getElementById('preview-image');
+        const uploadButton = document.querySelector('.upload-button');
+
+        editProfileButton.addEventListener('click', () => {
+            popup.style.display = 'flex';
+        });
+
+        detectFaceButton.addEventListener('click', () => {
+            popup2.style.display = 'flex';
+        });
+
+        detectFaceShapeButton.addEventListener('click', () => {
+            popup3.style.display = 'flex';
+        });
+
+        document.getElementById('closePopupBtn').addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+
+        closeBtn2.addEventListener('click', function () {
+            popup2.style.display = 'none';
+        });
+
+        closeBtn3.addEventListener('click', function () {
+            popup3.style.display = 'none';
+        });
+
+        document.getElementById('upload-circle').addEventListener('click', function() {
+            document.getElementById('file-input').click();
+        });
+
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const circle = document.getElementById('upload-circle');
+                    circle.style.backgroundImage = `url(${e.target.result})`;
+                    circle.style.backgroundSize = 'cover';
+                    circle.style.backgroundPosition = 'center';
+                    document.querySelector('.plus-sign').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('upload-container').addEventListener('click', function() {
+            document.getElementById('file-input2').click();
+        });
+
+        document.getElementById('file-input2').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const rectangle = document.getElementById('upload-container');
+                    rectangle.style.backgroundImage = `url(${e.target.result})`;
+                    rectangle.style.backgroundSize = 'cover';
+                    rectangle.style.backgroundPosition = 'center';
+                    document.querySelector('.plus-sign').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Edit profile form
+        document.getElementById('first-name').addEventListener('input', function(event) {
+            console.log('First name:', event.target.value);
+        });
+
+        document.getElementById('last-name').addEventListener('input', function(event) {
+            console.log('Last name:', event.target.value);
+        });
+
+        document.getElementById('location').addEventListener('input', function(event) {
+            console.log('Location:', event.target.value);
+        });
+
+        document.getElementById('gender').addEventListener('input', function(event) {
+            console.log('Gender:', event.target.value);
+        });
+
+        document.getElementById('email').addEventListener('input', function(event) {
+            console.log('Email:', event.target.value);
+        });
+
+        document.getElementById('bio').addEventListener('input', function(event) {
+            console.log('Bio:', event.target.value);
+        });
+
+        document.getElementById('age').addEventListener('input', function(event) {
+            console.log('Age:', event.target.value);
+        });
+
+        document.getElementById('bust').addEventListener('input', function(event) {
+            console.log('Bust:', event.target.value);
+        });
+
+        document.getElementById('height').addEventListener('input', function(event) {
+            console.log('Height:', event.target.value);
+        });
+
+        document.getElementById('waist').addEventListener('input', function(event) {
+            console.log('Waist:', event.target.value);
+        });
+
+        document.getElementById('weight').addEventListener('input', function(event) {
+            console.log('Weight:', event.target.value);
+        });
+
+        document.getElementById('hips').addEventListener('input', function(event) {
+            console.log('Hips:', event.target.value);
+        });
+
+        uploadButton.addEventListener('click', () => {
+        const formData = new FormData();
+        formData.append('image', imageUploadInput.files[0]);
+        fetch('/upload-profile-image', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+            if (data.success) {
+                popup.style.display = 'none';
+                alert('Image uploaded successfully!');
+            } else {
+                alert('Failed to upload image: ' + data.error);
+            }
+            })
+            .catch(error => {
+            console.error('Error uploading image:', error);
+            alert('Failed to upload image!');
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
