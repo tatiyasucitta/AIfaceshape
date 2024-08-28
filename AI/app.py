@@ -39,22 +39,18 @@ app = FastAPI()
 async def root():
     return 'hello'
 
-# Endpoint untuk memprediksi bentuk wajah
 @app.post("/predict")
 async def predict_face_shape(file: UploadFile = File(...)):
     try:
-        # Baca file gambar dan transformasi
         image_bytes = await file.read()
         image_tensor = transform_image(image_bytes)
         
-        # Lakukan prediksi
         with torch.no_grad():
             image_tensor = image_tensor.to(device)
             outputs = model(image_tensor)
             _, predicted = torch.max(outputs, 1)
 
-            # Mapping indeks kelas prediksi ke label bentuk wajah
-            face_shapes = ['Heart', 'Oblong', 'Oval', 'Round', 'Square']  # Tentukan kelas bentuk wajah Anda
+            face_shapes = ['Heart', 'Oblong', 'Oval', 'Round', 'Square'] 
             predicted_shape = face_shapes[predicted.item()]
 
         return JSONResponse(content={"face_shape": predicted_shape})
